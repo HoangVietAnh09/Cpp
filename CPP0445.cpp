@@ -13,10 +13,12 @@ int main(){
             cin >> x;
             s.insert(x);
         }
-        cout << *s.rbegin() << endl;
-        s.erase(*s.rbegin());
-        if(s.size() == 0){
+        if(s.size() == 1){
             cout << "-1" << endl;
+        }else{
+            cout << *s.begin() << " ";
+            s.erase(*s.begin());
+            cout << *s.begin() << endl;
         }
     }
     return 0;
