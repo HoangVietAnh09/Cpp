@@ -11,12 +11,17 @@ int check(int n){
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0), cout.tie(0);
-    int a, b;
-    cin >> a >> b;
-    for(int i = fmin(a, b); i <= fmax(a, b); i++){
-        if(check(i)){
-            cout << i << " ";
+    int t;
+    cin >> t;
+    while(t--){
+        int a, b;
+        cin >> a >> b;
+        for(int i = a; i <= b; i++){
+            if(check(i)){
+                cout << i << " ";
+            }
         }
+        cout << endl;
     }
     return 0;
 }
