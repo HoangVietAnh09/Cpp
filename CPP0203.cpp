@@ -14,7 +14,7 @@ int main(){
             cin >> x;
             mp[x] = true;
         }
-        for(int i = -10e6; i <= 10e6; i++){
+        for(int i = 1; i <= 10e6; i++){
             if(mp[i] == false){
                 cout << i << endl;
                 break;
