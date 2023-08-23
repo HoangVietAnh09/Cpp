@@ -7,19 +7,19 @@ int main(){
     int t;
     cin >> t;
     while(t--){
-        int n;
+        ll n;
         cin >> n;
-        vector<int> v;
-        for(int i = 0; i < n; i++){
-            int x;
+        vector<ll> v;
+        for(ll i = 0; i < n; i++){
+            ll x;
             cin >> x;
             v.push_back(x);
         }
-        for(auto x : v){
-            if(find(v.begin(), v.end(), x) != v.end()){
-                cout << "-1" << " ";
+        for(ll i = 0; i < n; i++){
+            if(find(v.begin(), v.end(), i) != v.end()){
+                cout << i << " ";
             }else{
-                cout << x << " ";
+                cout << "-1" << " ";
             }
         }
         cout << endl;
