@@ -1,28 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-void in(int &k, int x[]){
+int n, k, x[1004], ok;
+void khoitao(){
     for(int i = 1; i <= k; i++){
-        cout << x[i];
+        x[i] = i;
     }
-    cout << " ";
 }
-void sinh(int i, int &k, int &n, int x[]){
-    for(int j = x[i-1]+1; j <= n - k + i; j++){
-        x[i] = j;
-        if(i == k)
-            in(k, x);
-        else
-            sinh(i+1);
+void sinh(){
+    int i = k;
+    while(i >= 1 && x[i] == n-k+i){
+        i--;
+    }
+    if(i == 0){
+        ok = 0;
+    }
+    else{
+        x[i]++;
+        for(int j = i + 1; j <= k; j++){
+            x[j] = x[j-1] + 1;
+        }
     }
 }
 int main(){
     int t;
     cin >> t;
     while(t--){
-        int n, k, x[10000] = {0};
         cin >> n >> k;
-        sinh(1, k, n, x);
+        khoitao();
+        ok = 1;
+        while(ok){
+            for(int i = 1; i <= k; i++){
+                cout << x[i];
+            }
+            cout << " ";
+            sinh();
+        }
         cout << endl;
-        return 0;
     }
+    return 0;
 }
