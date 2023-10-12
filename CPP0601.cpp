@@ -7,29 +7,28 @@ class SinhVien{
         float gpa;
     public:
         SinhVien(){
-            this->id = "";
-            this->name = "";
-            this->clas = "";
-            this->birth = "";
-            this->gpa = 0;
+            id = "";
+            name = "";
+            clas = "";
+            birth = "";
+            gpa = 0;
         }
         void nhap();
         void xuat();
 };
 void SinhVien::nhap(){
-    getline(cin, this->name);
-    cin >> this->clas;
-    cin >> this->birth;
-    cin >> this->gpa;
+    getline(cin, name);
+    cin >> clas;
+    cin >> birth;
+    cin >> gpa;
+    id = "B20DCCN001";
 }
 
 void SinhVien::xuat(){
-    if(this->birth[1] = '/') this->birth = "0" + this->birth;
-    if(this->birth[4] = '/') this->birth.insert(3, "0");
-    this->id = "B20DCCN001";
-    cout << this->id << " " << this->name << " " << this->clas << " " << this->birth << " " << fixed << setprecision(2) << this->gpa;
+    if(birth[1] = '/') birth = "0" + birth;
+    if(birth[4] = '/') birth.insert(3, "0");
+    cout << id << " " << name << " " << clas << " " << birth << " " << fixed << setprecision(2) << this->gpa;
 }
-
 int main(){
     SinhVien a;
     a.nhap();
