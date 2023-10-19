@@ -1,22 +1,19 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, k, a[10004];
+int n, k, a[104];
 set<int> s;
 void in(){
     int tmp = 0;
-    int sum = 0;
-    for(int i = 0; i < n; i++){
-        tmp = tmp*10 + a[i];
-        sum += a[i];
+    for(int i = 1; i <= k; i++){
+        tmp += 
     }
-    if(sum == k)
-        s.insert(tmp);
 }
 void sinh(int i){
-    for(int j = 0; j < 10; j++){
+    for(int j = 0; j <= 9; j++){
         a[i] = j;
-        if(i == n){
+        if(i >= k){
             in();
+            s.insert()
         }else{
             sinh(i+1);
         }
