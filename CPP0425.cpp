@@ -8,18 +8,21 @@ int main(){
     while(t--){
         int n;
         cin >> n;
-        vector<int> v(n);
-        for(int &x : v) cin >> x;
-        for(int i = 1; i < v.size(); i++){
-            if(i%2 == 0 && v[i] <= v[i-1]){
-                swap(v[i], v[i-1]);
-            }else if(i%2 != 0 && v[i] >= v[i-1]){
-                swap(v[i], v[i-1]);
-            }
+        int a[n], b[n];
+        for(int &x : a) cin >> x;
+        int cnt = 0;
+        sort(a, a + n);
+        for(int i = 0; i < n; i++){
+            if(i%2 == 0)
+                b[i] = a[cnt++];
         }
-    for(int x : v) cout << x << " ";
-    cout << endl;
-
+        for(int i = 0; i < n; i++){
+            if(i%2 != 0)
+                b[i] = a[cnt++];
+        }
+        for(int i = 0; i < n; i++)
+            cout << b[i] << " ";
+        cout << endl;
     }
     return 0;
 }
