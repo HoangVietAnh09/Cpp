@@ -6,14 +6,16 @@ class SinhVien{
         string msv, hoTen, lop, ngaySinh;
         float gpa;
     public:
-        SinhVien(){
-            msv = hoTen = lop = ngaySinh = "";
-            gpa = 0;
-        }
-        friend void chuanHoa(SinhVien&);
-        friend istream& operator >> (istream&, SinhVien&);
-        friend ostream& operator << (ostream&, SinhVien);
+    SinhVien(){
+        msv = hoTen = lop = ngaySinh = "";
+        gpa = 0;
+    }
+    friend void chuanHoa(SinhVien &a);
+    friend bool cmp(SinhVien a, SinhVien b);
+    friend istream& operator >> (istream&, SinhVien&);
+    friend ostream& operator << (ostream&, SinhVien);
 };
+
 istream& operator >> (istream &in, SinhVien &a){
     cin.ignore();
     cnt++;
@@ -26,7 +28,7 @@ istream& operator >> (istream &in, SinhVien &a){
     return in;
 }
 void chuanHoa(SinhVien &a){
-    string tmp = "";
+    string tmp;
     stringstream ss(a.hoTen);
     string token;
     while(ss >> token){
@@ -34,19 +36,21 @@ void chuanHoa(SinhVien &a){
         for(int i = 1; i < token.length(); i++){
             tmp += tolower(token[i]);
         }
-        tmp += " ";
+        tmp += ' ';
     }
     tmp.erase(tmp.length()-1);
     a.hoTen = tmp;
-
 }
-ostream& operator << (ostream &out, SinhVien a){
+ostream& operator << (ostream& out, SinhVien a){
     chuanHoa(a);
-    cout << a.msv << " " << a.hoTen << " " << a.lop << " " << a.ngaySinh << " " << fixed << setprecision(2) << a.gpa << endl;
+    out << a.msv << " " << a.hoTen << " " << a.lop << " " << a.ngaySinh << " " << fixed << setprecision(2) << a.gpa << endl;
     return out;
 }
 bool cmp(SinhVien a, SinhVien b){
     return a.gpa > b.gpa;
+}
+void sapxep(SinhVien *ds, int n){
+    sort(ds, ds + n, cmp);
 }
 int main(){
     SinhVien ds[50];
