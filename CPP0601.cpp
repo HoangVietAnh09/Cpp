@@ -7,10 +7,7 @@ class SinhVien{
         float gpa;
     public:
         SinhVien(){
-            id = "";
-            name = "";
-            clas = "";
-            birth = "";
+            id = name = clas = birth = "";
             gpa = 0;
         }
         void nhap();
@@ -27,7 +24,7 @@ void SinhVien::nhap(){
 void SinhVien::xuat(){
     if(birth[1] = '/') birth = "0" + birth;
     if(birth[4] = '/') birth.insert(3, "0");
-    cout << id << " " << name << " " << clas << " " << birth << " " << fixed << setprecision(2) << this->gpa;
+    cout << id << " " << name << " " << clas << " " << birth << " " << fixed << setprecision(2) << gpa;
 }
 int main(){
     SinhVien a;
