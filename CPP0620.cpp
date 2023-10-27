@@ -16,7 +16,8 @@ istream& operator >> (istream& in, SinhVien& a){
     cin >> a.msv;
     getline(in, a.hoTen);
     cin.ignore();
-    cin >> a.lop >> a.email;
+    cin >> a.lop;
+    cin >> a.email;
     return in;
 }
 ostream& operator << (ostream& out, SinhVien a){
