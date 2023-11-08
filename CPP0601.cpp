@@ -1,30 +1,29 @@
 #include <bits/stdc++.h>
-#define ll long long
 using namespace std;
 class SinhVien{
     private:
-        string id, name, clas, birth;
+        string msv, hoTen, lop, ngaySinh;
         float gpa;
     public:
         SinhVien(){
-            id = name = clas = birth = "";
+            msv = hoTen = lop = ngaySinh = "";
             gpa = 0;
         }
         void nhap();
         void xuat();
 };
 void SinhVien::nhap(){
-    getline(cin, name);
-    cin >> clas;
-    cin >> birth;
+    msv = "B22DCCN001";
+    getline(cin, hoTen);
+    cin.ignore();
+    cin >> lop;
+    cin >> ngaySinh;
     cin >> gpa;
-    id = "B20DCCN001";
 }
-
 void SinhVien::xuat(){
-    if(birth[1] = '/') birth = "0" + birth;
-    if(birth[4] = '/') birth.insert(3, "0");
-    cout << id << " " << name << " " << clas << " " << birth << " " << fixed << setprecision(2) << gpa;
+    if(ngaySinh[1] == '/') ngaySinh = "0" + ngaySinh;
+    if(ngaySinh[4] == '/') ngaySinh.insert(3, "0");
+    cout << msv << " " << hoTen << " " << ngaySinh << " " << fixed << setprecision(2) << gpa << endl;
 }
 int main(){
     SinhVien a;
