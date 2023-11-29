@@ -1,76 +1,40 @@
 #include <bits/stdc++.h>
-<<<<<<< HEAD
 using namespace std;
+int cnt = 1;
 struct NhanVien{
-    string id, name, sex, birth, address, tax, res;
+    string mnv, ten, gt, ns, dc, tax, reg;
+    int ngay, thang, nam;
+    string tmp;
 };
-
-struct ngay{
-    int day, month, year;
-};
-
-
-
-void nhap(NhanVien p){
-=======
-#define ll long long
-using namespace std;
-int tmp = 1;
-struct NhanVien{
-    string id, name, sex, birth, address, res;
-    ll tax;
-};
-void nhap(NhanVien &p){
+ void nhap(NhanVien &p){
     cin.ignore();
-    string t = to_string(tmp);
-    p.id = t;
-    while(p.id.length() < 5){
-        p.id = "0" + p.id; 
+    getline(cin, p.ten);
+    cin >> p.gt >> p.ns;
+    cin.ignore();
+    getline(cin, p.dc);
+    cin >> p.tax >> p.reg;
+    p.ngay = (p.ns[3]-'0')*10 + p.ns[4]-'0';
+    p.thang = (p.ns[0]-'0')*10 + p.ns[1]-'0';
+    p.ns = (p.ns[6]-'0')*1000 + (p.ns[7]-'0')*100 + (p.ns[8]-'0')*10 + p.ns[9]-'0';
+}
+void inds(NhanVien ds[], int n){
+    for(int i = 0; i < n; i++){
+        if(cnt < 10) ds[i].mnv = "0000" + cnt++;
+        else ds[i].mnv = "000" + cnt++;
+        cout << ds[i].mnv << " " << ds[i].ten << " " << ds[i].gt << " " << ds[i].ns << " " << ds[i].dc << " " << ds[i].tax << " " << ds[i].reg << endl;
     }
-    tmp++;
->>>>>>> ea7261b4ac4e960207bc69db9cebfc0d87d07af2
-    getline(cin, p.name);
-    cin >> p.sex;
-    cin >> p.birth;
-    cin.ignore();
-<<<<<<< HEAD
-    getline(cin, p.birth);
-    cin >> p.tax;
-    cin >> p.res;
-}
-
-void sapxep(NhanVien p[], int n){
-
-}
-
-void inds(NhanVien p[], int n){
-
-=======
-    getline(cin, p.address);
-    cin >> p.tax;
-    cin.ignore();
-    cin >> p.res;
 }
 bool cmp(NhanVien a, NhanVien b){
-    string tmp1 = "", tmp2 = "";
-    tmp1 += a.birth.substr(6) += a.birth.substr(3, 2) += a.birth.substr(0, 2);
-    tmp2 += b.birth.substr(6) += b.birth.substr(3, 2) += b.birth.substr(0, 2);
-    return tmp1 < tmp2;
+    if(a.nam < b.nam) return true;
+    if(a.nam == b.nam && a.thang < b.thang) return true;
+    if(a.nam == b.nam && a.thang == b.thang && a.ngay < b.ngay) return true;
+    return false;
+
 }
-void sapxep(NhanVien p[], int n){
-    sort(p, p + n, cmp);
+void sapxep(NhanVien ds[], int n){
+    sort(ds, ds+n, cmp);
 }
-void inds(NhanVien p[], int n){
-    for(int i = 0; i < n; i++){
-        if(p[i].birth[1] == '/') p[i].birth = "0" + p[i].birth;
-        if(p[i].birth[4] == '/') p[i].birth.insert(3, "0");
-        if(p[i].res[1] == '/') p[i].res = "0" + p[i].res;
-        if(p[i].res[4] == '/') p[i].res.insert(3, "0");
-        cout << p[i].id << " " << p[i].name << " " << p[i].sex << " " << p[i].birth << " " << p[i].address << " " << p[i].tax << " " << p[i].res;
-        cout << endl;
-    }
->>>>>>> ea7261b4ac4e960207bc69db9cebfc0d87d07af2
-}
+
 int main(){
     struct NhanVien ds[50];
     int N,i;

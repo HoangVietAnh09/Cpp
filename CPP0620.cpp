@@ -2,31 +2,34 @@
 using namespace std;
 class SinhVien{
     private:
-        string hoTen, email;
+        string hoTen, email, msv, lop;
     public:
-        string msv, lop;
         SinhVien(){
             msv = hoTen = lop = email = "";
+        }
+        string getLop(){
+            return this->lop;
+        }
+        string getMsv(){
+            return this->msv;
         }
         friend istream& operator >> (istream&, SinhVien&);
         friend ostream& operator << (ostream&, SinhVien);
 };
 istream& operator >> (istream& in, SinhVien& a){
-    in.ignore();
-    cin >> a.msv;
+    getline(in, a.msv);
     getline(in, a.hoTen);
-    cin.ignore();
-    cin >> a.lop;
-    cin >> a.email;
+    getline(in, a.lop);
+    getline(in, a.email);
     return in;
 }
 ostream& operator << (ostream& out, SinhVien a){
-    cout << a.msv << " " << a.hoTen << " " << a.lop << " " << a.email << endl;
+    out << a.msv << " " << a.hoTen << " " << a.lop << " " << a.email << endl;
     return out;
 }
 bool cmp(SinhVien a, SinhVien b){
-    if(a.lop < b.lop) return true;
-    if(a.lop == b.lop && a.msv < b.msv) return true;
+    if(a.getLop() < b.getLop()) return true;
+    if(a.getLop() == b.getLop() && a.getMsv() < b.getMsv()) return true;
     return false;
 }
 void sapXep(SinhVien *ds, int n){
