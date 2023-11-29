@@ -1,43 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
-int min(vector<vector<int>> &matrix){
-    int n = matrix.size();
-    vector<int> rows(n, 0);
-    vector<int> cos(n, 0);
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            rows[i] += matrix[i][j];
-            cos[j] += matrix[i][j];
-        }
+class doanhNghiep{
+    private:
+        string id, ten;
+        int count;
+    public:
+    int getCount(){
+        return count;
     }
-    int cnt = 0;
-    for(int i = 0; i < n; i++){
-        int target = rows[i];
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                int tmp = abs(matrix[i][j] - target);
-                cnt += tmp;
-            }
-        }
+    string getTen(){
+        return ten;
     }
-    return cnt;
-
+    string getId(){
+        return id;
+    }
+    friend istream& operator >> (istream&, doanhNghiep&);
+    friend ostream& operator << (ostream&, doanhNghiep);
+};
+istream& operator >> (istream &in, doanhNghiep &p){
+    cin.ignore();
+    getline(in, p.id);
+    getline(in, p.ten);
+    in >> p.count;
+    return in;
+}
+bool cmp(doanhNghiep x, doanhNghiep y){
+    if(x.getCount() != y.getCount()){
+        return x.getCount() > y.getCount();
+    }
+    if(x.getCount() == y.getCount()){
+        return x.getId() < y.getId();
+    }
 }
 int main(){
-    ios_base::sync_with_stdio(0);
-    cin.tie(0), cout.tie(0);
-    int t;
-    cin >> t;
-    while(t--){
-        int n;
-        cin >> n;
-        vector<vector<int>> v(n, vector<int>(n));
+    int n;
+    cin >> n;
+    doanhNghiep ds[n];
+    for(int i = 0; i < n; i++) cin >> ds[i];
+    sort(ds, ds+n, cmp);
+    int q;
+    cin >> q;
+    while(q--){
+        int a, b;
+        cin >> a >> b;
+        cout << "DANH SACH DOANH NGHIEP NHAN TU " << a << " DEN " << b << " SINH VIEN:" << endl;
         for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                cin >> v[i][j];
+            if(ds[i].getCount() >= a && ds[i].getCount() <= b){
+                cout << ds[i].getId() << " " << ds[i].getTen() << " " << ds[i].getCount() << endl;
             }
         }
-        cout << min(v) << endl;
+
     }
-    return 0;
+
 }
