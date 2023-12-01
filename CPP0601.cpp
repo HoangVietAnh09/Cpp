@@ -13,17 +13,16 @@ class SinhVien{
         void xuat();
 };
 void SinhVien::nhap(){
-    msv = "B22DCCN001";
     getline(cin, hoTen);
-    cin.ignore();
-    cin >> lop;
-    cin >> ngaySinh;
+    getline(cin, lop);
+    getline(cin, ngaySinh);
     cin >> gpa;
 }
 void SinhVien::xuat(){
+    msv = "B20DCCN001";
     if(ngaySinh[1] == '/') ngaySinh = "0" + ngaySinh;
     if(ngaySinh[4] == '/') ngaySinh.insert(3, "0");
-    cout << msv << " " << hoTen << " " << ngaySinh << " " << fixed << setprecision(2) << gpa << endl;
+    cout << msv << " " << hoTen << " " << lop << " " << ngaySinh << " " << fixed << setprecision(2) << gpa << endl;
 }
 int main(){
     SinhVien a;

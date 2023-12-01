@@ -1,53 +1,53 @@
-#include <iostream>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
+void findMax(int m, int s){
+    vector<int> v;
+    while(m--){
+        if(s > 9){
+            v.push_back(9);
+            s -= 9;
+        }else{
+            v.push_back(s);
+            s = 0;
+        }
+    }    
+    for(int i = 0; i < v.size(); i++){
+        cout << v[i];
+    }
+}
+void findMin(int m, int s){
+    vector<int> v;
+    while(m--){
+        if(s > 9){
+            v.push_back(9);
+            s -= 9;
+        }else if(m > 0 && s != 1){
+            v.push_back(s-1);
+            s = 1;
+        }else if(s == 1 && m > 0){
+            v.push_back(0);
+        }else{
+            v.push_back(s);
+        }
+    }
+    for(int i = v.size() - 1; i >= 0; i--){
+        cout << v[i];
+    }
+}
 
 int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0), cout.tie(0);
     int m, s;
     cin >> m >> s;
-
-    // Tìm số bé nhất
-    string min_number(m, '0');
-    int s_remaining = s;
-
-    if (s == 0 && m > 1) {
-        cout << "-1 -1" << endl;
-    } else {
-        for (int i = 0; i < m; i++) {
-            for (int digit = 0; digit < 10; digit++) {
-                if ((i > 0 || digit > 0) && (s_remaining - digit >= 0)) {
-                    min_number[i] = '0' + digit;
-                    s_remaining -= digit;
-                    break;
-                }
-            }
-        }
-        if (s_remaining == 0) {
-            cout << min_number << " ";
-        } else {
-            cout << "-1 ";
-        }
+    if(s > 9*m || s < 1){
+        cout << "-1 -1";
+    }else{
+        findMin(m, s);
+        cout << " ";
+        findMax(m, s);
     }
 
-    // Tìm số lớn nhất
-    s_remaining = s;
-    string max_number(m, '9');
-
-    for (int i = 0; i < m; i++) {
-        for (int digit = 9; digit >= 0; digit--) {
-            if (s_remaining - digit >= 0) {
-                max_number[i] = '0' + digit;
-                s_remaining -= digit;
-                break;
-            }
-        }
-    }
-
-    if (s_remaining == 0) {
-        cout << max_number << endl;
-    } else {
-        cout << "-1" << endl;
-    }
 
     return 0;
 }
