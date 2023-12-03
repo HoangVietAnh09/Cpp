@@ -5,6 +5,7 @@ class GiangVien{
     private:
         string mgv, ten, mon;
     public:
+        string tmp;
         GiangVien(){
             mgv = ten = mon = "";
         }
@@ -19,6 +20,9 @@ istream& operator >> (istream &in, GiangVien &p){
     p.mgv += string(2-to_string(cnt).length(), '0') + to_string(cnt);
     cnt++;
     getline(in, p.ten);
+    for(int i = 0; i < p.ten.length(); i++){
+        p.tmp.push_back(toupper(p.ten[i]));
+    }
     getline(in, p.mon);
     stringstream ss(p.mon);
     string token;
@@ -47,17 +51,20 @@ int main(){
     while(q--){
         string major;
         getline(cin, major);
-        string tmp;
-        stringstream ss(major);
-        string token;
-        while(ss >> token){
-            tmp.push_back(toupper(token[0]));
+        cout << "DANH SACH GIANG VIEN THEO TU KHOA " << major << ":\n";
+        for(int i = 0; i < major.length(); i++){
+            major[i] = toupper(major[i]);
         }
-        cout << "DANH SACH GIANG VIEN BO MON " << tmp << ":\n";
         for(int i = 0; i < n; i++){
-            if(tmp == ds[i].getMon()){
-                cout << ds[i];
+            int a = 0, b = 0;
+            string token;
+            stringstream ss(major);
+            while(ss >> token){
+                a++;
+                if(ds[i].tmp.find(token) != -1) b++;
             }
+            if(a == b) cout << ds[i];
+            
         }
     }
 

@@ -1,85 +1,108 @@
 #include <bits/stdc++.h>
 using namespace std;
-int mkh = 0, mmh = 0;;
-class KhackHang{
+int mkh = 0, mmh = 0, mhd = 0;
+
+class KhachHang;
+class MatHang;
+class HoaDon;
+
+map<string, KhachHang> KH;
+map<string, MatHang> MH;
+
+class KhachHang{
     private:
-        string maKhachHang, tenKhackHang, gioiTinh, ngaySinh, diaChi;
+        string maKhachHang, tenKhachHang, gioiTinh, ngaySinh, diaChi;
     public:
-        KhackHang(){
-            maKhachHang = "KH";
-            tenKhackHang = gioiTinh = ngaySinh = diaChi = "";
+        friend class HoaDon;
+        KhachHang(){
+            maKhachHang = tenKhachHang = gioiTinh = ngaySinh = diaChi = "";
         }
-        friend istream& operator >> (istream& in, KhackHang& p){
-            if(mkh < 10) p.maKhachHang += "00" + to_string(mkh);
-            else p.maKhachHang += "0" + to_string(mkh);
-            getline(in, p.tenKhackHang);
-            cin >> p.gioiTinh >> p.ngaySinh;
-            cin.ignore();
-            getline(in, p.diaChi);
+        string getTenKhachHang(){
+            return this->tenKhachHang;
+        }
+        string getDiaChi(){
+            return this->diaChi;
+        }
+        friend istream& operator >> (istream &in, KhachHang &kh){
+            mkh++;
+            kh.maKhachHang = "KH";
+            kh.maKhachHang += string(3-to_string(mkh).length(), '0') + to_string(mkh);
+            scanf("\n");
+            getline(in, kh.tenKhachHang);
+            getline(in, kh.gioiTinh);
+            getline(in, kh.ngaySinh);
+            getline(in, kh.diaChi);
+            KH[kh.maKhachHang] = kh;
             return in;
-
-        };
-        friend ostream& operator << (ostream& out, KhackHang p){
-
         };
 };
 class MatHang{
     private:
         string maMatHang, tenMatHang, donVi;
-        float giaMua, giaBan;
+        int giaMua, giaBan;
     public:
+        friend class HoaDon;
         MatHang(){
-            maMatHang = "MH";
-            tenMatHang = donVi = "";
+            maMatHang = tenMatHang = donVi = "";
             giaMua = giaBan = 0;
         }
-        friend istream& operator >> (istream& in, MatHang& p){
-            if(mkh < 10) p.maMatHang += "00" + to_string(mmh);
-            else p.maMatHang += "0" + to_string(mmh);
-            p.maMatHang = "KH";
-            getline(in, p.tenMatHang);
-            getline(in, p.donVi);
-            in >> p.giaMua >> p.giaBan;
+        string getTenMatHang(){
+            return this->tenMatHang;
+        }
+        string getDonVi(){
+            return this->donVi;
+        }
+        int getGiaMua(){
+            return this->giaMua;
+        }
+        int getGiaBan(){
+            return this->giaBan;
+        }
+        friend istream& operator >> (istream &in, MatHang &mh){
+            mmh++;
+            mh.maMatHang = "MH";
+            mh.maMatHang += string(3-to_string(mmh).length(), '0') + to_string(mmh);
+            scanf("\n");
+            getline(in, mh.tenMatHang);
+            getline(in, mh.donVi);
+            in >> mh.giaMua >> mh.giaBan;
+            MH[mh.maMatHang] = mh;
+            return in;
         };
-        friend ostream& operator << (ostream& out, MatHang p){
-
-        };
-        
 };
-class HoaDon: public KhackHang, public MatHang{
+class HoaDon{
     private:
-        string maHoaDon;
+        string maKhachHang, maMatHang, maHoaDon;
         int soLuong;
     public:
         HoaDon(){
             maHoaDon = "";
             soLuong = 0;
         }
-        friend istream& operator >> (istream& in, HoaDon& p){
-            cin >> p.soLuong;
+        friend istream& operator >> (istream &in, HoaDon &hd){
+            mhd++;
+            hd.maHoaDon = "HD";
+            hd.maHoaDon += string(3-to_string(mhd).length(), '0') + to_string(mhd);
+            in >> hd.maKhachHang >> hd.maMatHang >> hd.soLuong;
+            return in;
         };
-        friend ostream& operator << (ostream& out, HoaDon p){
-
+        friend ostream& operator << (ostream &out, HoaDon hd){
+            out << hd.maHoaDon << " " << KH[hd.maKhachHang].getTenKhachHang() << " " << KH[hd.maKhachHang].getDiaChi() << " " << MH[hd.maMatHang].getTenMatHang() << " " << MH[hd.maMatHang].getDonVi() << " " << MH[hd.maMatHang].getGiaMua() << " " << MH[hd.maMatHang].getGiaBan() << " " << hd.soLuong << " " << hd.soLuong * MH[hd.maMatHang].getGiaBan() << endl;
+            return out;
         };
 };
 int main(){
-    int n, m, k;
-
-    cin >> n;
-    KhackHang dskh[n];
-    cin.ignore();
-    for(int i = 0; i < n; i++) cin >> dskh[i];
-
-    cin >> m;
-    MatHang dsmh[m];
-    cin.ignore();
-    for(int i = 0; i < m; i++) cin >> dsmh[i];
-
-    cin >> k;
-    HoaDon dshd[k];
-    cin.ignore();
-    for(int i = 0; i < k; i++) cin >> dshd[i];
-    for(int i = 0; i < k; i++) cout << dshd[i];
-
+    KhachHang dskh[25];
+    MatHang dsmh[45];
+    HoaDon dshd[105];
+    int N,M,K,i;
+    cin >> N;
+    for(i=0;i<N;i++) cin >> dskh[i];
+    cin >> M;
+    for(i=0;i<M;i++) cin >> dsmh[i];
+    cin >> K;
+    for(i=0;i<K;i++) cin >> dshd[i];
+    
+    for(i=0;i<K;i++) cout << dshd[i];
     return 0;
 }
