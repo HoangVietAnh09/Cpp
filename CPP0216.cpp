@@ -1,5 +1,16 @@
 #include <bits/stdc++.h>
 using namespace std;
+bool check(int l, int r, vector<int> a){
+    for(int i = l; i < r; i++){
+        if(a[i] > a[i+1]){
+            for(int j = i; j < r; j++){
+                if(a[j] <= a[j+1]) return false;
+            }
+        }
+       
+    }
+    return true;
+}
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0), cout.tie(0);
@@ -8,32 +19,14 @@ int main(){
     while(t--){
         int n;
         cin >> n;
-        int a[n];
-        for(int &x : a) cin >> x;
+        vector<int> v(n);
+        for(int i = 0; i < n; i++) cin >> v[i];
         int l, r;
         cin >> l >> r;
-        int b[r-l+1];
-        int m = 0;
-        for(int i = l; i <= r; i++){
-            b[m++] = a[i];
-        }
-        int check = 1;
-        for(int i = 0; i < (r-l+1)/2; i++){
-            if(b[i] > b[i+1]){
-                check = 0;
-                break; 
-            }
-        }
-        for(int i = (r-l+1)/2; i < (r-l+1); i++){
-            if(b[i] < b[i+1]){
-                check = 0;
-                break;
-            }
-        }
-        if(check){
-            cout << "Yes" << endl; 
+        if(check(l, r, v)){
+            cout << "Yes\n";
         }else{
-            cout << "NO" << endl;
+            cout << "No\n";
         }
     }
     return 0;
