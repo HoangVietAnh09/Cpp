@@ -7,29 +7,28 @@ int main(){
     while(t--){
         int n, m, k;
         cin >> n >> m >> k;
-        map<ll, int> mp;
-        for(int i = 0; i < n; i++){
-            ll x;
-            cin >> x;
-            mp[x]++;
+        int a[n], b[m], c[k];
+        for(int i = 0; i < n; i++) cin >> a[i];
+        for(int i = 0; i < m; i++) cin >> b[i];
+        for(int i = 0; i < k; i++) cin >> c[i];
+        bool check = false;
+        int i = 0, j = 0, l = 0;
+        while(i < n && j < m && l < k){
+            if(a[i] == b[j] && a[i] == c[l]){
+                cout << a[i] << " ";
+                i++, j++, k++;
+                check = true;
+            }else if(a[i] < b[j]) i++;
+            else if(b[j] < c[l]) j++;
+            else l++;
         }
-        for(int i = 0; i < m; i++){
-            ll x;
-            cin >> x;
-            mp[x]++;
-        }
-        for(int i = 0; i < k; i++){
-            ll x;
-            cin >> x;
-            mp[x]++;
-        }
-        for(auto x : mp){
-            if(x.second != 1){
-                cout << x.first << " ";
-            }else{
-                continue;
-            }
-        }
+        if(!check) cout << -1;
+        cout << endl;
+       
+        cout << endl;
+
+
+        
     }
     return 0;
 }
