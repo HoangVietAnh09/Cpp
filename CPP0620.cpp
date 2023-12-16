@@ -37,9 +37,11 @@ void sapXep(SinhVien *ds, int n){
 }
 
 int main(){
+//	freopen("DATA.in", "r", stdin);
     SinhVien ds[1004];
     int n;
     cin >> n;
+    cin.ignore();
     for(int i = 0; i < n; i++) cin >> ds[i];
     sapXep(ds, n);
     for(int i = 0; i < n; i++) cout << ds[i];
